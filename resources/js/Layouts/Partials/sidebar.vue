@@ -76,13 +76,21 @@
                 </div>
 
                 <!-- company -->
-                <div class="nav-item mb-1
-                    flex items-center px-2 py-1 text-white rounded-md transition-colors duration-200 transform hover:bg-blue-600
-                ">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                    <span class="ml-2 font-medium">Company</span>
+                <div class="nav-item mb-1">
+                    <Link
+                        :href="route('admin.companys.index')"
+                        class="nav-item"
+                        :class="
+                            route().current('admin.companys.*')
+                            ? 'flex items-center px-2 py-1 text-white rounded-md bg-blue-600'
+                            : 'flex items-center px-2 py-1 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-600'
+                        "
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <span class="ml-2 font-medium">Company</span>
+                    </Link>
                 </div>
 
             </nav>

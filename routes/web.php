@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\ConpanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::
 
 Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::prefix('/dashboards')->name('dashboards.')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('companys')->name('companys.')->group(function () {
+        Route::get('/', [ConpanyController::class, 'index'])->name('index');
+        Route::get('/create', [ConpanyController::class, 'create'])->name('create');
+        Route::post('/', [ConpanyController::class, 'store'])->name('store');
+        Route::get('{company}/edit', [ConpanyController::class, 'edit'])->name('edit');
+        Route::put('{company}', [ConpanyController::class, 'update'])->name('update');
+        Route::put('{company}/delete', [ConpanyController::class, 'destroy'])->name('destroy');
+    });
+
 });
