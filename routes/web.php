@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\ConpanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,21 +18,65 @@ use App\Http\Controllers\Admins\DashboardController;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
+// old route
+// Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class,'index'])->name('index');
+
+// Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'verified'])->group(function() {
+//     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
+//     Route::prefix('/dashboards')->name('dashboards.')->group(function () {
+//         Route::get('/', [DashboardController::class, 'index'])->name('index');
+//     });
+
+//     Route::prefix('companys')->name('companys.')->group(function () {
+//         Route::get('/', [ConpanyController::class, 'index'])->name('index');
+//         Route::get('/create', [ConpanyController::class, 'create'])->name('create');
+//         Route::post('/', [ConpanyController::class, 'store'])->name('store');
+//         Route::get('{company}/edit', [ConpanyController::class, 'edit'])->name('edit');
+//         Route::put('{company}', [ConpanyController::class, 'update'])->name('update');
+//         Route::put('{company}/delete', [ConpanyController::class, 'destroy'])->name('destroy');
+//     });
+
 // });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->name('dashboard');
+// new route
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class,'index'])->name('index');
+    Route::prefix('admin')->name('admin.')->middleware(['role:admin'])->group(function () {
+        Route::prefix('companys')->name('companys.')->group(function () {
+            Route::get('/', [ConpanyController::class, 'index'])->name('index');
+            Route::get('/create', [ConpanyController::class, 'create'])->name('create');
+            Route::post('/', [ConpanyController::class, 'store'])->name('store');
+            Route::get('{company}/edit', [ConpanyController::class, 'edit'])->name('edit');
+            Route::put('{company}', [ConpanyController::class, 'update'])->name('update');
+            Route::put('{company}/delete', [ConpanyController::class, 'destroy'])->name('destroy');
+        });
+    });
 
-Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'verified'])->group(function() {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::prefix('purchasing')->name('purchasing.')->middleware(['can:manage purchasing'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('selling')->name('selling.')->middleware(['can:manage selling'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('invoice')->name('invoice.')->middleware(['can:manage invoice'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('delivery')->name('delivery.')->middleware(['can:manage delivery'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('stock')->name('stock.')->middleware(['can:manage stock'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('accounting')->name('accounting.')->middleware(['can:manage accounting'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+
 });
