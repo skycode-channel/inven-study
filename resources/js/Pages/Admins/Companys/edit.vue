@@ -209,7 +209,7 @@ import AdminLayout from "@/Layouts/AdminLayout";
 
 export default {
     created () {
-        document.title = "Companys";
+        document.title = "Edit Company";
     },
     components: {
         JetButton,

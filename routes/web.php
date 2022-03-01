@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\ConpanyController;
+use App\Http\Controllers\Admins\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::post('/', [ConpanyController::class, 'store'])->name('store');
             Route::get('{company}/edit', [ConpanyController::class, 'edit'])->name('edit');
             Route::put('{company}', [ConpanyController::class, 'update'])->name('update');
-            Route::put('{company}/delete', [ConpanyController::class, 'destroy'])->name('destroy');
+            Route::delete('{company}/delete', [ConpanyController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('roles')->name('roles.')->group(function () {
+            Route::get('/', [RoleController::class, 'index'])->name('index');
+            Route::get('/create', [RoleController::class, 'create'])->name('create');
+            Route::post('/', [RoleController::class, 'store'])->name('store');
+            Route::get('{role}/edit', [RoleController::class, 'edit'])->name('edit');
+            Route::put('{role}', [RoleController::class, 'update'])->name('update');
+            Route::delete('{role}/delete', [RoleController::class, 'destroy'])->name('destroy');
         });
     });
 
