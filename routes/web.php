@@ -7,6 +7,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\ConpanyController;
 use App\Http\Controllers\Admins\RoleController;
+use App\Http\Controllers\Admins\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('{role}/edit', [RoleController::class, 'edit'])->name('edit');
             Route::put('{role}', [RoleController::class, 'update'])->name('update');
             Route::delete('{role}/delete', [RoleController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/', [UserController::class, 'store'])->name('store');
+            Route::get('{user}/edit', [UserController::class, 'edit'])->name('edit');
+            Route::put('{user}', [UserController::class, 'update'])->name('update');
+            Route::delete('{user}/delete', [UserController::class, 'destroy'])->name('destroy');
         });
     });
 
