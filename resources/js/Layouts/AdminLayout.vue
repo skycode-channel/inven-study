@@ -10,7 +10,9 @@
                     </div>
 
                     <div class="overflow-y-auto p-2">
-                        <slot></slot>
+                        <div class="max-w-screen-2xl mx-auto px-0 xl:px-2">
+                            <slot></slot>
+                        </div>
                     </div>
                 </div>
 
@@ -30,13 +32,13 @@ export default {
         Link
     },
     data() {
-        return{
+        return {
             navOpen:
                 localStorage.getItem("navOpen") === "false"
-                ? false
-                : localStorage.getItem("navOpen") === "true"
-                ? true
-                : "",
+                    ? false
+                    : localStorage.getItem("navOpen") === "true"
+                        ? true
+                        : "",
         };
     },
     watch: {

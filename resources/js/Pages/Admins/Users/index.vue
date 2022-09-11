@@ -31,13 +31,13 @@
             </nav>
 
             <!-- breadcrumb header -->
-            <div class="text-3xl font-bold mt-2 mb-2">
+            <div class="text-3xl font-bold mt-2 mb-2 print:hidden">
                 Users
             </div>
         </div>
 
         <!-- search, select option paginate & button create -->
-        <div class="flex flex-row flex-wrap space-x-0 lg:space-x-2 mb-2">
+        <div class="flex flex-row flex-wrap space-x-0 lg:space-x-2 mb-2 print:hidden">
             <div class="w-full lg:w-64 mb-2 lg:mb-0">
                 <div class="relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -252,7 +252,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="mt-2">
+                                                    <div class="mt-2 print:hidden">
                                                         <div class="flex justify-start">
                                                             <Link :href="route('admin.users.edit', user.id)">
                                                             <button type="submit"
@@ -295,7 +295,7 @@
                                                         <h2
                                                             class=" ml-0 md:ml-4 lg:ml-4 text-sm font-medium text-gray-900">
                                                             Created : {{ user.created_at }}, Modified : {{
-                                                                    user.updated_at
+                                                            user.updated_at
                                                             }}
                                                         </h2>
                                                     </div>
