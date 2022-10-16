@@ -52,7 +52,10 @@ class HandleInertiaRequests extends Middleware
                         'permissions' => Auth::user()->is_admin ? Permission::all()->pluck('name') : Auth::user()->getAllPermissions()->pluck('name'),
                     ] : null,
                 ];
-            }
+            },
+            'unreadNotificationsCount' => Auth::user() ? [
+                'count' => Auth::user()->unreadNotifications()->count(),
+            ] : null,
         ]);
     }
 }

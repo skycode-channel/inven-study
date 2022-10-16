@@ -14,9 +14,14 @@
                 </div>
 
                 <div class="col-end-12">
-                    <div>
-                        <AccountDropdown />
-                    </div>
+                    <ul class="flex items-center flex-shrink-0 space-x-2 lg:space-x-6">
+                        <li class="relative">
+                            <NotificationsDropdown :user="$page.props.auth.user" />
+                        </li>
+                        <li class="relative">
+                            <AccountDropdown />
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -25,9 +30,12 @@
 
 <script>
 import AccountDropdown from "./AccountDropdown";
+import NotificationsDropdown from "./NotificationsDropdown";
+
 export default {
     components: {
-        AccountDropdown
-    }
+        AccountDropdown,
+        NotificationsDropdown
+    },
 }
 </script>

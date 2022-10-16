@@ -8,6 +8,7 @@ use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\ConpanyController;
 use App\Http\Controllers\Admins\RoleController;
 use App\Http\Controllers\Admins\UserController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,14 @@ use App\Http\Controllers\Admins\UserController;
 // new route
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::prefix('notification')->name('notification.')->group(function (){
+        Route::prefix('noties')->name('noties.')->group(function () {
+            Route::get('/test', [NotificationController::class, 'test'])->name('test');
+            Route::get('/info', [NotificationController::class, 'info'])->name('info');
+            Route::post('mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
+        });
+    });
 
     Route::prefix('admin')->name('admin.')->middleware(['role:admin'])->group(function () {
         Route::prefix('companys')->name('companys.')->group(function () {
